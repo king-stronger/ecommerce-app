@@ -58,6 +58,14 @@
 
 	{#if $session.data?.user}
 		<p class="mt-4 text-sm text-muted-foreground">{$session.data.user.email}</p>
+		{#if $session.data.user.role === 'admin'}
+			<a
+				href={resolve('/admin')}
+				class="mt-4 inline-flex text-sm font-medium underline underline-offset-4"
+			>
+				Open admin →
+			</a>
+		{/if}
 		<Button class="mt-6 rounded-full" variant="outline" type="button" onclick={signOut}>
 			Sign out
 		</Button>
