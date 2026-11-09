@@ -294,6 +294,7 @@ export type DeleteCartResponses = {
 			productId: string;
 			productName: string;
 			productSlug: string;
+			productImage: string | null;
 			variantName: string;
 			sku: string;
 			unitPrice: number;
@@ -326,6 +327,7 @@ export type GetCartResponses = {
 			productId: string;
 			productName: string;
 			productSlug: string;
+			productImage: string | null;
 			variantName: string;
 			sku: string;
 			unitPrice: number;
@@ -395,6 +397,7 @@ export type PostCartItemsResponses = {
 			productId: string;
 			productName: string;
 			productSlug: string;
+			productImage: string | null;
 			variantName: string;
 			sku: string;
 			unitPrice: number;
@@ -454,6 +457,7 @@ export type DeleteCartItemsByIdResponses = {
 			productId: string;
 			productName: string;
 			productSlug: string;
+			productImage: string | null;
 			variantName: string;
 			sku: string;
 			unitPrice: number;
@@ -525,6 +529,7 @@ export type PatchCartItemsByIdResponses = {
 			productId: string;
 			productName: string;
 			productSlug: string;
+			productImage: string | null;
 			variantName: string;
 			sku: string;
 			unitPrice: number;
