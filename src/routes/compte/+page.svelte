@@ -14,7 +14,7 @@
 		authError = '';
 		const result = await authClient.signIn.email({ email, password });
 		if (result.error) {
-			authError = result.error.message ?? 'Connexion impossible.';
+			authError = result.error.message ?? 'Could not sign in.';
 		}
 	}
 
@@ -24,15 +24,17 @@
 </script>
 
 <svelte:head>
-	<title>Compte · Boutique</title>
+	<title>Account · FORMA</title>
 </svelte:head>
 
 <section class="mx-auto max-w-md px-4 py-16 sm:px-6">
-	<h1 class="text-3xl font-semibold tracking-tight">Compte</h1>
+	<h1 class="font-serif text-3xl tracking-tight">Account</h1>
 
 	{#if $session.data?.user}
-		<p class="mt-4 text-sm text-foreground/70">{$session.data.user.email}</p>
-		<Button class="mt-6" variant="outline" type="button" onclick={signOut}>Se déconnecter</Button>
+		<p class="mt-4 text-sm text-muted-foreground">{$session.data.user.email}</p>
+		<Button class="mt-6 rounded-full" variant="outline" type="button" onclick={signOut}>
+			Sign out
+		</Button>
 	{:else}
 		<form class="mt-8 grid gap-4" onsubmit={signIn}>
 			<div class="grid gap-1.5">
@@ -40,7 +42,7 @@
 				<Input id="email" type="email" autocomplete="username" bind:value={email} required />
 			</div>
 			<div class="grid gap-1.5">
-				<Label for="password">Mot de passe</Label>
+				<Label for="password">Password</Label>
 				<Input
 					id="password"
 					type="password"
@@ -52,7 +54,7 @@
 			{#if authError}
 				<p class="text-sm text-destructive">{authError}</p>
 			{/if}
-			<Button type="submit">Se connecter</Button>
+			<Button class="rounded-full" type="submit">Sign in</Button>
 		</form>
 	{/if}
 </section>

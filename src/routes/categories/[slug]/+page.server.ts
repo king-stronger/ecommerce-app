@@ -9,7 +9,7 @@ export const load: PageServerLoad = async ({ params }) => {
 	]);
 
 	if (category.error || !category.data) {
-		error(404, 'Cette catégorie n’existe pas.');
+		error(404, 'This category does not exist.');
 	}
 
 	return {

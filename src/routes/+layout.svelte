@@ -13,13 +13,13 @@
 
 <div class="min-h-screen bg-background text-foreground">
 	<a
-		href="#contenu"
+		href="#content"
 		class="sr-only focus:not-sr-only focus:absolute focus:top-3 focus:left-3 focus:z-30 focus:bg-background focus:px-3 focus:py-2"
 	>
-		Aller au contenu
+		Skip to content
 	</a>
 	<SiteHeader categories={data.categories} />
-	<main id="contenu">
+	<main id="content">
 		{@render children()}
 	</main>
 </div>

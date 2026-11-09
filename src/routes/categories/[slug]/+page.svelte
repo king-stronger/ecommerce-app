@@ -7,21 +7,21 @@
 </script>
 
 <svelte:head>
-	<title>{data.category.name} · Boutique</title>
+	<title>{data.category.name} · FORMA</title>
 </svelte:head>
 
-<section class="mx-auto max-w-6xl px-4 py-14 sm:px-6">
-	<a href={resolve('/')} class="text-sm text-muted-foreground hover:text-foreground">Toutes les pièces</a>
-	<h1 class="mt-6 text-4xl font-semibold tracking-tight">{data.category.name}</h1>
+<section class="mx-auto max-w-6xl px-4 py-12 sm:px-6">
+	<a href={resolve('/')} class="text-sm text-muted-foreground hover:text-foreground">Home</a>
+	<h1 class="mt-5 font-serif text-4xl tracking-tight">{data.category.name}</h1>
 	{#if data.category.description}
 		<p class="mt-3 max-w-[48ch] text-sm text-muted-foreground">{data.category.description}</p>
 	{/if}
 
-	<div class="mt-12">
+	<div class="mt-10">
 		{#if data.products.length === 0}
-			<p class="text-sm text-foreground/70">Rien dans cette catégorie.</p>
+			<p class="text-sm text-muted-foreground">Nothing in this category yet.</p>
 		{:else}
-			<ProductGrid products={data.products} />
+			<ProductGrid products={data.products} columns="dense" />
 		{/if}
 	</div>
 </section>

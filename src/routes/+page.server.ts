@@ -2,26 +2,33 @@ import { getCategories, getProducts } from '#lib/api/client';
 import type { PageServerLoad } from './$types';
 
 export const load: PageServerLoad = async () => {
-	const categories = await getCategories();
+	const [categories, products] = await Promise.all([
+		getCategories(),
+		getProducts({ query: { limit: 100 } })
+	]);
 
-	if (categories.error || !categories.data) {
+	if (categories.error || products.error || !categories.data || !products.data) {
 		return {
-			shelves: [],
-			error: 'Le catalogue est indisponible. Lance l’API sur le port 8787.'
+			categories: [],
+			products: [],
+			categoryCounts: {} as Record<string, number>,
+			error: 'The catalog is unavailable. Start the API on port 8787.'
 		};
 	}
 
-	const shelves = await Promise.all(
+	const countEntries = await Promise.all(
 		categories.data.map(async (category) => {
-			const products = await getProducts({
-				query: { categorySlug: category.slug, limit: 4 }
+			const result = await getProducts({
+				query: { categorySlug: category.slug, limit: 100 }
 			});
-			return {
-				category,
-				products: products.data ?? []
-			};
+			return [category.slug, result.data?.length ?? 0] as const;
 		})
 	);
 
-	return { shelves, error: null };
+	return {
+		categories: categories.data,
+		products: products.data,
+		categoryCounts: Object.fromEntries(countEntries) as Record<string, number>,
+		error: null
+	};
 };
