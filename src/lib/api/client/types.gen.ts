@@ -1041,6 +1041,7 @@ export type GetAdminProductsData = {
 		limit?: number;
 		offset?: number;
 		status?: 'draft' | 'active' | 'archived';
+		q?: string;
 	};
 	url: '/admin/products';
 };
@@ -1058,45 +1059,16 @@ export type GetAdminProductsErrors = {
 
 export type GetAdminProductsResponses = {
 	/**
-	 * Products
+	 * Paginated products
 	 */
-	200: Array<{
-		id: string;
-		name: string;
-		slug: string;
-		description: string;
-		shortDescription: string;
-		status: 'draft' | 'active' | 'archived';
-		images:
-			| string
-			| number
-			| boolean
-			| unknown
-			| {
-					[key: string]: unknown;
-			  }
-			| Array<unknown>;
-		createdAt: string;
-		updatedAt: string;
-		variants: Array<{
+	200: {
+		items: Array<{
 			id: string;
-			productId: string;
 			name: string;
-			sku: string;
-			price: number;
-			compareAtPrice: number;
-			stockQuantity: number;
-			trackInventory: boolean;
-			weight: number;
-			options:
-				| string
-				| number
-				| boolean
-				| unknown
-				| {
-						[key: string]: unknown;
-				  }
-				| Array<unknown>;
+			slug: string;
+			description: string;
+			shortDescription: string;
+			status: 'draft' | 'active' | 'archived';
 			images:
 				| string
 				| number
@@ -1106,13 +1078,47 @@ export type GetAdminProductsResponses = {
 						[key: string]: unknown;
 				  }
 				| Array<unknown>;
-			isDefault: boolean;
-			isActive: boolean;
 			createdAt: string;
 			updatedAt: string;
+			variants: Array<{
+				id: string;
+				productId: string;
+				name: string;
+				sku: string;
+				price: number;
+				compareAtPrice: number;
+				stockQuantity: number;
+				trackInventory: boolean;
+				weight: number;
+				options:
+					| string
+					| number
+					| boolean
+					| unknown
+					| {
+							[key: string]: unknown;
+					  }
+					| Array<unknown>;
+				images:
+					| string
+					| number
+					| boolean
+					| unknown
+					| {
+							[key: string]: unknown;
+					  }
+					| Array<unknown>;
+				isDefault: boolean;
+				isActive: boolean;
+				createdAt: string;
+				updatedAt: string;
+			}>;
+			categoryIds?: Array<string>;
 		}>;
-		categoryIds?: Array<string>;
-	}>;
+		total: number;
+		limit: number;
+		offset: number;
+	};
 };
 
 export type GetAdminProductsResponse = GetAdminProductsResponses[keyof GetAdminProductsResponses];
@@ -1693,6 +1699,8 @@ export type GetAdminOrdersData = {
 	query?: {
 		limit?: number;
 		offset?: number;
+		status?: 'pending' | 'confirmed' | 'cancelled' | 'completed';
+		q?: string;
 	};
 	url: '/admin/orders';
 };
@@ -1710,63 +1718,68 @@ export type GetAdminOrdersErrors = {
 
 export type GetAdminOrdersResponses = {
 	/**
-	 * Orders
+	 * Paginated orders
 	 */
-	200: Array<{
-		id: string;
-		orderNumber: string;
-		status: string;
-		paymentStatus: string;
-		fulfillmentStatus: string;
-		currency: string;
-		subtotal: number;
-		discountAmount: number;
-		shippingAmount: number;
-		taxAmount: number;
-		totalAmount: number;
-		customerEmail: string;
-		customerPhone: string;
-		shippingAddress: {
-			firstName: string;
-			lastName?: string;
-			company?: string;
-			phone?: string;
-			addressLine1: string;
-			addressLine2?: string;
-			city: string;
-			state: string;
-			postalCode: string;
-			country: string;
-		};
-		billingAddress: {
-			firstName: string;
-			lastName?: string;
-			company?: string;
-			phone?: string;
-			addressLine1: string;
-			addressLine2?: string;
-			city: string;
-			state: string;
-			postalCode: string;
-			country: string;
-		};
-		shippingMethodName: string;
-		trackingNumber: string;
-		notes: string;
-		createdAt: string;
+	200: {
 		items: Array<{
 			id: string;
-			productId: string;
-			productVariantId: string;
-			productName: string;
-			variantName: string;
-			sku: string;
-			unitPrice: number;
-			quantity: number;
+			orderNumber: string;
+			status: string;
+			paymentStatus: string;
+			fulfillmentStatus: string;
+			currency: string;
+			subtotal: number;
 			discountAmount: number;
+			shippingAmount: number;
+			taxAmount: number;
 			totalAmount: number;
+			customerEmail: string;
+			customerPhone: string;
+			shippingAddress: {
+				firstName: string;
+				lastName?: string;
+				company?: string;
+				phone?: string;
+				addressLine1: string;
+				addressLine2?: string;
+				city: string;
+				state: string;
+				postalCode: string;
+				country: string;
+			};
+			billingAddress: {
+				firstName: string;
+				lastName?: string;
+				company?: string;
+				phone?: string;
+				addressLine1: string;
+				addressLine2?: string;
+				city: string;
+				state: string;
+				postalCode: string;
+				country: string;
+			};
+			shippingMethodName: string;
+			trackingNumber: string;
+			notes: string;
+			createdAt: string;
+			items: Array<{
+				id: string;
+				productId: string;
+				productVariantId: string;
+				productName: string;
+				variantName: string;
+				sku: string;
+				unitPrice: number;
+				quantity: number;
+				discountAmount: number;
+				totalAmount: number;
+			}>;
 		}>;
-	}>;
+		total: number;
+		limit: number;
+		offset: number;
+	};
 };
 
 export type GetAdminOrdersResponse = GetAdminOrdersResponses[keyof GetAdminOrdersResponses];

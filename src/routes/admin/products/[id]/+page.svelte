@@ -18,6 +18,8 @@
 	import { Button } from '#lib/components/ui/button/index.js';
 	import { Input } from '#lib/components/ui/input/index.js';
 	import { Label } from '#lib/components/ui/label/index.js';
+	import Check from '@lucide/svelte/icons/check';
+	import Trash2 from '@lucide/svelte/icons/trash-2';
 	import { page } from '$app/state';
 	import { onMount } from 'svelte';
 
@@ -300,21 +302,29 @@
 									Default
 								</label>
 							</div>
-							<div class="flex flex-wrap gap-2 sm:col-span-2">
-								<Button class="rounded-full" size="sm" type="submit" disabled={busy}>
-									Save variant
+							<div class="flex flex-wrap items-center gap-2 sm:col-span-2">
+								<Button
+									size="icon-sm"
+									type="submit"
+									disabled={busy}
+									aria-label={`Save ${variant.name}`}
+									title="Save"
+								>
+									<Check size={16} strokeWidth={1.7} />
 								</Button>
 								<Button
 									variant="ghost"
-									size="sm"
-									class="text-destructive"
+									size="icon-sm"
+									class="text-destructive hover:bg-destructive/10"
 									type="button"
 									disabled={busy}
+									aria-label={`Delete ${variant.name}`}
+									title="Delete"
 									onclick={() => removeVariant(variant)}
 								>
-									Delete
+									<Trash2 size={16} strokeWidth={1.7} />
 								</Button>
-								<span class="self-center text-xs text-muted-foreground">
+								<span class="text-xs text-muted-foreground">
 									Current {formatPrice(variant.price)}
 								</span>
 							</div>
