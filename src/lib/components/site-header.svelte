@@ -7,8 +7,11 @@
 	import ShoppingBag from '@lucide/svelte/icons/shopping-bag';
 	import { onMount } from 'svelte';
 
-	let { categories }: { categories: Array<{ id: string; name: string; slug: string }> } =
-		$props();
+	let {
+		categories
+	}: {
+		categories: Array<{ id: string; name: string; slug: string; image?: string | null }>;
+	} = $props();
 
 	const session = authClient.useSession();
 	const cartCount = $derived(getCartCount());
@@ -32,32 +35,10 @@
 	</div>
 
 	<div class="border-b border-border bg-background">
-		<div
-			class="mx-auto grid max-w-6xl grid-cols-[1fr_auto_1fr] items-center gap-3 px-4 py-4 sm:px-6"
-		>
-			<nav class="hidden items-center gap-5 md:flex" aria-label="Shop">
-				<a href={resolve('/')} class="text-sm" aria-current={page.url.pathname === '/' ? 'page' : undefined}>
-					Home
-				</a>
-				{#each categories as category (category.id)}
-					<a
-						href={resolve('/categories/[slug]', { slug: category.slug })}
-						class="text-sm text-muted-foreground hover:text-foreground"
-						aria-current={categoryCurrent(category.slug) ? 'page' : undefined}
-					>
-						{category.name}
-					</a>
-				{/each}
-			</nav>
+		<div class="mx-auto flex max-w-6xl items-center gap-4 px-4 py-3.5 sm:px-6">
+			<a href={resolve('/')} class="font-serif text-2xl tracking-[0.12em]">FORMA</a>
 
-			<a
-				href={resolve('/')}
-				class="justify-self-start font-serif text-2xl tracking-[0.12em] md:justify-self-center"
-			>
-				FORMA
-			</a>
-
-			<div class="flex items-center justify-end gap-3">
+			<div class="ml-auto flex items-center gap-3">
 				{#if $session.data?.user}
 					<a
 						href={resolve('/compte')}
@@ -82,20 +63,37 @@
 				</a>
 			</div>
 		</div>
-
-		<nav
-			class="flex gap-4 overflow-x-auto border-t border-border px-4 py-2.5 md:hidden"
-			aria-label="Shop"
-		>
-			{#each categories as category (category.id)}
-				<a
-					href={resolve('/categories/[slug]', { slug: category.slug })}
-					class="shrink-0 text-sm text-muted-foreground"
-					aria-current={categoryCurrent(category.slug) ? 'page' : undefined}
-				>
-					{category.name}
-				</a>
-			{/each}
-		</nav>
 	</div>
+
+	{#if categories.length > 0}
+		<nav class="border-b border-border bg-foreground text-background" aria-label="Departments">
+			<div
+				class="mx-auto flex max-w-6xl items-stretch gap-1 overflow-x-auto px-3 py-2 [scrollbar-width:thin] sm:px-5"
+			>
+				<a
+					href={resolve('/')}
+					class="shrink-0 rounded-full px-3 py-1.5 text-sm whitespace-nowrap hover:bg-background/10 aria-[current=page]:bg-background/15"
+					aria-current={page.url.pathname === '/' ? 'page' : undefined}
+				>
+					Home
+				</a>
+				{#each categories as category (category.id)}
+					<a
+						href={resolve('/categories/[slug]', { slug: category.slug })}
+						class="inline-flex shrink-0 items-center gap-2 rounded-full px-3 py-1.5 text-sm whitespace-nowrap hover:bg-background/10 aria-[current=page]:bg-background/15"
+						aria-current={categoryCurrent(category.slug) ? 'page' : undefined}
+					>
+						{#if category.image}
+							<img
+								src={category.image}
+								alt=""
+								class="size-6 rounded-full object-cover ring-1 ring-background/20"
+							/>
+						{/if}
+						{category.name}
+					</a>
+				{/each}
+			</div>
+		</nav>
+	{/if}
 </header>
