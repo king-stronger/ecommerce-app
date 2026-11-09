@@ -4,6 +4,7 @@
 	import { getCart } from '#lib/api/client';
 	import { authClient } from '#lib/auth-client';
 	import { getCartCount, setCartCount } from '#lib/cart-count.svelte';
+	import ProfileMenu from '#lib/components/profile-menu.svelte';
 	import ShoppingBag from '@lucide/svelte/icons/shopping-bag';
 	import { onMount } from 'svelte';
 
@@ -39,13 +40,10 @@
 			<a href={resolve('/')} class="font-serif text-2xl tracking-[0.12em]">FORMA</a>
 
 			<div class="ml-auto flex items-center gap-3">
-				{#if $session.data?.user}
-					<a
-						href={resolve('/compte')}
-						class="max-w-28 truncate text-sm text-muted-foreground hover:text-foreground sm:max-w-40"
-					>
-						{$session.data.user.email}
-					</a>
+				{#if $session.isPending}
+					<div class="size-8 animate-pulse rounded-full bg-muted" aria-hidden="true"></div>
+				{:else if $session.data?.user}
+					<ProfileMenu user={$session.data.user} />
 				{:else}
 					<a href={resolve('/compte')} class="text-sm text-muted-foreground hover:text-foreground">
 						Login

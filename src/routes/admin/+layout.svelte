@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { resolve } from '$app/paths';
-	import { page } from '$app/state';
 	import { isAdminUser } from '#lib/admin';
 	import { authClient } from '#lib/auth-client';
 	import type { LayoutProps } from './$types';
@@ -10,18 +9,17 @@
 	const session = authClient.useSession();
 	const ready = $derived(!$session.isPending);
 	const allowed = $derived(isAdminUser($session.data?.user));
-
-	function navClass(href: string) {
-		const active = page.url.pathname === href || page.url.pathname.startsWith(`${href}/`);
-		return active
-			? 'border-b-2 border-background pb-1 text-background'
-			: 'pb-1 text-background/70 hover:text-background';
-	}
 </script>
 
 {#if !ready}
-	<section class="mx-auto max-w-5xl px-4 py-16 sm:px-6">
-		<p class="text-sm text-muted-foreground">Checking admin access…</p>
+	<section class="mx-auto max-w-5xl px-4 py-16 sm:px-6" aria-busy="true">
+		<span class="sr-only">Checking admin access</span>
+		<div class="mb-8 h-9 w-56 animate-pulse rounded bg-muted"></div>
+		<div class="grid gap-4 sm:grid-cols-3">
+			{#each [1, 2, 3] as item (item)}
+				<div class="h-28 animate-pulse rounded-2xl bg-muted"></div>
+			{/each}
+		</div>
 	</section>
 {:else if !$session.data?.user}
 	<section class="mx-auto max-w-md px-4 py-16 sm:px-6">
@@ -45,23 +43,5 @@
 		</a>
 	</section>
 {:else}
-	<div class="min-h-screen">
-		<header class="bg-foreground text-background">
-			<div class="mx-auto flex max-w-5xl flex-wrap items-center gap-4 px-4 py-4 sm:px-6">
-				<a href={resolve('/admin')} class="font-serif text-xl tracking-[0.12em]">FORMA Admin</a>
-				<nav class="flex flex-wrap items-center gap-4 text-sm">
-					<a href={resolve('/admin/products')} class={navClass('/admin/products')}>Products</a>
-					<a href={resolve('/admin/categories')} class={navClass('/admin/categories')}>
-						Categories
-					</a>
-					<a href={resolve('/admin/orders')} class={navClass('/admin/orders')}>Orders</a>
-				</nav>
-				<div class="ml-auto flex items-center gap-3 text-sm">
-					<span class="max-w-40 truncate text-background/70">{$session.data.user.email}</span>
-					<a href={resolve('/')} class="underline underline-offset-4">Shop</a>
-				</div>
-			</div>
-		</header>
-		{@render children()}
-	</div>
+	{@render children()}
 {/if}
