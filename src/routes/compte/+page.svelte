@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { goto } from '$app/navigation';
 	import { resolve } from '$app/paths';
 	import { isAdminUser } from '#lib/admin';
 	import { authClient } from '#lib/auth-client';
@@ -71,6 +72,7 @@
 
 	async function signOut() {
 		await authClient.signOut();
+		await goto(resolve('/'));
 	}
 
 	function switchMode(next: 'signin' | 'signup') {
