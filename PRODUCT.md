@@ -16,7 +16,7 @@ A storefront that shows the full public surface of the ecommerce API: catalog, g
 
 ## Positioning
 
-FORMA is a thin client of the existing OpenAPI backend. Guest cart and checkout already exist on the API. The storefront does not invent payments, reviews, search, wishlist, or membership.
+Ecommerce is a thin client of the existing OpenAPI backend. Guest cart and checkout already exist on the API. The storefront does not invent payments, reviews, search, wishlist, or membership.
 
 ## Operating Context
 
@@ -26,7 +26,7 @@ Local demo. API on port 8787, SvelteKit on 4173. Admin stays in Scalar. UI langu
 
 - Live: public catalog, guest cart cookie, checkout routes, order lookup, Better Auth account, shipping methods, coupon WELCOME10.
 - Not live: search, wishlist, reviews, lookbook, financing, newsletter membership.
-- Brand name: FORMA.
+- Brand name: Ecommerce.
 - Visual direction is a structural copy of the approved fashion homepage mock (promo bar, centered wordmark, lifestyle hero, circular category row, asymmetric edit, mid banner, bestseller grid). Product detail follows the approved PDP anatomy (gallery, options, quantity, dual CTAs, shipping facts) without inventing backend features.
 
 ## Brand Commitments
@@ -41,5 +41,5 @@ Seeded English categories and products with photos, Standard (€4.99) and Expre
 
 - One clear next step: browse → product → cart.
 - Real catalog data only; density high enough that the shop feels stocked.
-- Header: promo, categories, FORMA, account, cart.
+- Header: promo, categories, Ecommerce, account, cart.
 - Admin and payment stay out of this storefront.

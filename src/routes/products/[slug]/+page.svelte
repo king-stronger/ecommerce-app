@@ -164,7 +164,7 @@
 </script>
 
 <svelte:head>
-	<title>{data.product.name} · FORMA</title>
+	<title>{data.product.name} · Ecommerce</title>
 </svelte:head>
 
 <article class="mx-auto grid max-w-6xl gap-10 px-4 py-8 sm:px-6 lg:grid-cols-2 lg:items-start lg:py-12">

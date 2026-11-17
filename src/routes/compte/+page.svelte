@@ -91,7 +91,7 @@
 </script>
 
 <svelte:head>
-	<title>Account · FORMA</title>
+	<title>Account · Ecommerce</title>
 </svelte:head>
 
 <section class="mx-auto max-w-2xl px-4 py-14 sm:px-6">
@@ -104,7 +104,7 @@
 		</div>
 	{:else if $session.data?.user}
 		{@const user = $session.data.user}
-		<p class="mt-2 text-sm text-muted-foreground">Manage your FORMA profile and session.</p>
+		<p class="mt-2 text-sm text-muted-foreground">Manage your Ecommerce profile and session.</p>
 
 		<div class="mt-8 rounded-2xl border border-border bg-card p-5">
 			<div class="flex items-start gap-4">
@@ -118,7 +118,7 @@
 					</span>
 				{/if}
 				<div class="min-w-0 flex-1">
-					<p class="font-medium">{user.name?.trim() || 'FORMA customer'}</p>
+					<p class="font-medium">{user.name?.trim() || 'Ecommerce customer'}</p>
 					<p class="mt-1 truncate text-sm text-muted-foreground">{user.email}</p>
 					<p class="mt-3 text-xs tracking-[0.12em] text-muted-foreground uppercase">
 						{isAdminUser(user) ? 'Admin' : 'Customer'} · since {memberSince(user.createdAt)}

@@ -47,7 +47,7 @@
 </script>
 
 <svelte:head>
-	<title>FORMA</title>
+	<title>Ecommerce</title>
 </svelte:head>
 
 {#if data.error}
@@ -265,7 +265,7 @@
 	<footer class="border-t border-border">
 		<div class="mx-auto grid max-w-6xl gap-10 px-4 py-12 sm:grid-cols-[1.2fr_1fr_1fr] sm:px-6">
 			<div>
-				<p class="font-serif text-2xl tracking-[0.12em]">FORMA</p>
+				<p class="font-serif text-2xl tracking-[0.12em]">Ecommerce</p>
 				<p class="mt-3 max-w-[32ch] text-sm text-muted-foreground">
 					English-language quiet luxury for everyday dressing across Europe.
 				</p>
@@ -301,7 +301,7 @@
 			</div>
 		</div>
 		<p class="border-t border-border px-4 py-4 text-center text-xs text-muted-foreground sm:px-6">
-			© {new Date().getFullYear()} FORMA. Prices in EUR.
+			© {new Date().getFullYear()} Ecommerce. Prices in EUR.
 		</p>
 	</footer>
 {/if}

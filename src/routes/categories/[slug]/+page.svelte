@@ -7,7 +7,7 @@
 </script>
 
 <svelte:head>
-	<title>{data.category.name} · FORMA</title>
+	<title>{data.category.name} · Ecommerce</title>
 </svelte:head>
 
 <section class="mx-auto max-w-6xl px-4 py-12 sm:px-6">

@@ -186,7 +186,7 @@
 </script>
 
 <svelte:head>
-	<title>{product?.name ?? 'Product'} · Admin · FORMA</title>
+	<title>{product?.name ?? 'Product'} · Admin · Ecommerce</title>
 </svelte:head>
 
 <section class="mx-auto max-w-3xl px-4 py-10 sm:px-6">

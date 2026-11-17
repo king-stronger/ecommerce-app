@@ -21,7 +21,7 @@
 </script>
 
 <svelte:head>
-	<title>Bag · FORMA</title>
+	<title>Bag · Ecommerce</title>
 </svelte:head>
 
 <section class="mx-auto max-w-3xl px-4 py-14 sm:px-6">

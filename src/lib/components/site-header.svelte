@@ -37,7 +37,7 @@
 
 	<div class="border-b border-border bg-background">
 		<div class="mx-auto flex max-w-6xl items-center gap-4 px-4 py-3.5 sm:px-6">
-			<a href={resolve('/')} class="font-serif text-2xl tracking-[0.12em]">FORMA</a>
+			<a href={resolve('/')} class="font-serif text-2xl tracking-[0.12em]">Ecommerce</a>
 
 			<div class="ml-auto flex items-center gap-3">
 				{#if $session.isPending}
