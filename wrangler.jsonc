@@ -8,6 +8,9 @@
 		"binding": "ASSETS",
 		"directory": ".svelte-kit/cloudflare"
 	},
+	// SSR reaches the API through a service binding (workers.dev -> workers.dev
+	// over the public URL is blocked by Cloudflare).
+	"services": [{ "binding": "API", "service": "ecommerce-api" }],
 	"workers_dev": true,
 	"preview_urls": true
 }
