@@ -1,11 +1,6 @@
 <script lang="ts">
 	import { resolve } from '$app/paths';
-	import {
-		centsToEurosInput,
-		eurosToCents,
-		parseImages,
-		slugify
-	} from '#lib/admin';
+	import { centsToEurosInput, eurosToCents, parseImages, slugify } from '#lib/admin';
 	import {
 		deleteAdminVariantsById,
 		getAdminCategories,
@@ -100,9 +95,7 @@
 				shortDescription: shortDescription.trim() || undefined,
 				description: description.trim() || undefined,
 				status,
-				images: imageUrl.trim()
-					? [{ url: imageUrl.trim(), alt: name.trim(), sort: 0 }]
-					: [],
+				images: imageUrl.trim() ? [{ url: imageUrl.trim(), alt: name.trim(), sort: 0 }] : [],
 				categoryIds
 			}
 		});
@@ -216,15 +209,14 @@
 				<Label for="description">Description</Label>
 				<textarea
 					id="description"
-					class="border-input bg-background ring-offset-background placeholder:text-muted-foreground focus-visible:ring-ring flex min-h-28 w-full rounded-md border px-3 py-2 text-sm focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none"
-					bind:value={description}
-				></textarea>
+					class="flex min-h-28 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:outline-none"
+					bind:value={description}></textarea>
 			</div>
 			<div class="grid gap-1.5">
 				<Label for="status">Status</Label>
 				<select
 					id="status"
-					class="border-input bg-background h-9 rounded-md border px-3 text-sm"
+					class="h-9 rounded-md border border-input bg-background px-3 text-sm"
 					bind:value={status}
 				>
 					<option value="active">Active</option>
@@ -333,7 +325,10 @@
 				{/each}
 			</ul>
 
-			<form class="mt-6 grid gap-4 rounded-2xl border border-dashed border-border p-4" onsubmit={addVariant}>
+			<form
+				class="mt-6 grid gap-4 rounded-2xl border border-dashed border-border p-4"
+				onsubmit={addVariant}
+			>
 				<p class="text-sm font-medium">Add variant</p>
 				<div class="grid gap-4 sm:grid-cols-3">
 					<div class="grid gap-1.5">

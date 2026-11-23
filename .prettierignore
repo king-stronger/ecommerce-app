@@ -7,3 +7,9 @@ bun.lockb
 
 # Miscellaneous
 /static/
+.cursor/
+.svelte-kit/
+.wrangler/
+.tmp-api-check/
+worker-configuration.d.ts
+src/lib/api/client/

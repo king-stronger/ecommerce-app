@@ -10,9 +10,7 @@
 	import Trash2 from '@lucide/svelte/icons/trash-2';
 	import { onMount } from 'svelte';
 
-	type Product = NonNullable<
-		Awaited<ReturnType<typeof getAdminProducts>>['data']
-	>['items'][number];
+	type Product = NonNullable<Awaited<ReturnType<typeof getAdminProducts>>['data']>['items'][number];
 
 	const PAGE_SIZE = 10;
 
@@ -115,9 +113,10 @@
 			</label>
 			<select
 				id="status"
-				class="border-input bg-background h-9 rounded-md border px-3 text-sm"
+				class="h-9 rounded-md border border-input bg-background px-3 text-sm"
 				value={status}
-				onchange={(event) => changeStatus((event.currentTarget as HTMLSelectElement).value as typeof status)}
+				onchange={(event) =>
+					changeStatus((event.currentTarget as HTMLSelectElement).value as typeof status)}
 			>
 				<option value="all">All</option>
 				<option value="active">Active</option>
@@ -140,7 +139,9 @@
 		<div class="mt-8 overflow-x-auto">
 			<table class="w-full min-w-[40rem] border-collapse text-left text-sm">
 				<thead>
-					<tr class="border-b border-border text-xs tracking-[0.12em] text-muted-foreground uppercase">
+					<tr
+						class="border-b border-border text-xs tracking-[0.12em] text-muted-foreground uppercase"
+					>
 						<th class="py-3 pr-3 font-medium">Name</th>
 						<th class="py-3 pr-3 font-medium">Status</th>
 						<th class="py-3 pr-3 font-medium">Variants</th>

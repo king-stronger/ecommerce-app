@@ -66,7 +66,7 @@
 	{#if categories.length > 0}
 		<nav class="border-b border-border bg-foreground text-background" aria-label="Departments">
 			<div
-				class="mx-auto flex max-w-6xl items-stretch gap-1 overflow-x-auto px-3 py-2 [scrollbar-width:thin] sm:px-5"
+				class="mx-auto flex max-w-6xl [scrollbar-width:thin] items-stretch gap-1 overflow-x-auto px-3 py-2 sm:px-5"
 			>
 				<a
 					href={resolve('/')}

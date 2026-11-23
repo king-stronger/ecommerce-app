@@ -121,15 +121,14 @@
 			<Label for="description">Description</Label>
 			<textarea
 				id="description"
-				class="border-input bg-background ring-offset-background placeholder:text-muted-foreground focus-visible:ring-ring flex min-h-28 w-full rounded-md border px-3 py-2 text-sm focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none"
-				bind:value={description}
-			></textarea>
+				class="flex min-h-28 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:outline-none"
+				bind:value={description}></textarea>
 		</div>
 		<div class="grid gap-1.5">
 			<Label for="status">Status</Label>
 			<select
 				id="status"
-				class="border-input bg-background h-9 rounded-md border px-3 text-sm"
+				class="h-9 rounded-md border border-input bg-background px-3 text-sm"
 				bind:value={status}
 			>
 				<option value="active">Active</option>

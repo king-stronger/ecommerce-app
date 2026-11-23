@@ -40,9 +40,7 @@
 			if (activeFilter === 'active' && !category.isActive) return false;
 			if (activeFilter === 'inactive' && category.isActive) return false;
 			if (!q) return true;
-			return (
-				category.name.toLowerCase().includes(q) || category.slug.toLowerCase().includes(q)
-			);
+			return category.name.toLowerCase().includes(q) || category.slug.toLowerCase().includes(q);
 		});
 	});
 
@@ -131,7 +129,10 @@
 	<h1 class="font-serif text-3xl tracking-tight">Categories</h1>
 	<p class="mt-2 text-sm text-muted-foreground">Departments shown in the shop header.</p>
 
-	<form class="mt-8 grid gap-4 rounded-2xl border border-border bg-card p-5 sm:grid-cols-2" onsubmit={save}>
+	<form
+		class="mt-8 grid gap-4 rounded-2xl border border-border bg-card p-5 sm:grid-cols-2"
+		onsubmit={save}
+	>
 		<div class="grid gap-1.5 sm:col-span-2">
 			<p class="text-sm font-medium">{editingId ? 'Edit category' : 'New category'}</p>
 		</div>
@@ -188,7 +189,7 @@
 			</label>
 			<select
 				id="active"
-				class="border-input bg-background h-9 rounded-md border px-3 text-sm"
+				class="h-9 rounded-md border border-input bg-background px-3 text-sm"
 				value={activeFilter}
 				onchange={(event) => {
 					activeFilter = (event.currentTarget as HTMLSelectElement).value as typeof activeFilter;

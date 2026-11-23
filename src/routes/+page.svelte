@@ -195,7 +195,9 @@
 			<div class="relative min-h-72 overflow-hidden rounded-3xl">
 				<img src={bannerImage} alt="" class="absolute inset-0 size-full object-cover" />
 				<div class="absolute inset-0 bg-black/35"></div>
-				<div class="relative flex min-h-72 max-w-lg flex-col justify-end gap-4 p-8 text-white sm:p-12">
+				<div
+					class="relative flex min-h-72 max-w-lg flex-col justify-end gap-4 p-8 text-white sm:p-12"
+				>
 					<h2 class="font-serif text-3xl text-balance sm:text-4xl">
 						Carry confidence with every single outfit today
 					</h2>

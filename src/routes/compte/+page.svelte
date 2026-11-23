@@ -151,8 +151,8 @@
 		<div class="mt-6 rounded-2xl border border-border p-5">
 			<p class="text-sm font-medium">Shopping</p>
 			<p class="mt-2 text-sm text-muted-foreground">
-				Use WELCOME10 at checkout for 10% off from €20 (cap €15). Your bag stays on this browser until
-				checkout.
+				Use WELCOME10 at checkout for 10% off from €20 (cap €15). Your bag stays on this browser
+				until checkout.
 			</p>
 			<div class="mt-4 flex flex-wrap gap-3 text-sm">
 				<a href={resolve('/panier')} class="font-medium hover:opacity-80">Open bag →</a>
@@ -227,12 +227,20 @@
 		<p class="mt-6 text-sm text-muted-foreground">
 			{#if mode === 'signin'}
 				New here?
-				<button type="button" class="underline underline-offset-4" onclick={() => switchMode('signup')}>
+				<button
+					type="button"
+					class="underline underline-offset-4"
+					onclick={() => switchMode('signup')}
+				>
 					Create an account
 				</button>
 			{:else}
 				Already have an account?
-				<button type="button" class="underline underline-offset-4" onclick={() => switchMode('signin')}>
+				<button
+					type="button"
+					class="underline underline-offset-4"
+					onclick={() => switchMode('signin')}
+				>
 					Sign in
 				</button>
 			{/if}

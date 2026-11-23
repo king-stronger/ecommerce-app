@@ -17,13 +17,7 @@ export function productPrice(product: CatalogProduct) {
 }
 
 export function productImages(product: {
-	images:
-		| string
-		| number
-		| boolean
-		| unknown
-		| { [key: string]: unknown }
-		| Array<unknown>;
+	images: string | number | boolean | unknown | { [key: string]: unknown } | Array<unknown>;
 }) {
 	if (!Array.isArray(product.images)) return [] as string[];
 	return product.images

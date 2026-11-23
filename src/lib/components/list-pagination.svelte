@@ -36,7 +36,7 @@
 			>
 				Previous
 			</Button>
-			<span class="tabular-nums text-muted-foreground">Page {page} / {pageCount}</span>
+			<span class="text-muted-foreground tabular-nums">Page {page} / {pageCount}</span>
 			<Button
 				variant="outline"
 				size="sm"

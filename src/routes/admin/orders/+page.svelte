@@ -98,13 +98,13 @@
 			</label>
 			<select
 				id="status"
-				class="border-input bg-background h-9 rounded-md border px-3 text-sm"
+				class="h-9 rounded-md border border-input bg-background px-3 text-sm"
 				value={status}
 				onchange={(event) =>
 					changeStatus((event.currentTarget as HTMLSelectElement).value as typeof status)}
 			>
 				<option value="all">All</option>
-				{#each statuses as item}
+				{#each statuses as item (item)}
 					<option value={item}>{item}</option>
 				{/each}
 			</select>
@@ -124,7 +124,9 @@
 		<div class="mt-8 overflow-x-auto">
 			<table class="w-full min-w-[44rem] border-collapse text-left text-sm">
 				<thead>
-					<tr class="border-b border-border text-xs tracking-[0.12em] text-muted-foreground uppercase">
+					<tr
+						class="border-b border-border text-xs tracking-[0.12em] text-muted-foreground uppercase"
+					>
 						<th class="py-3 pr-3 font-medium">Order</th>
 						<th class="py-3 pr-3 font-medium">Customer</th>
 						<th class="py-3 pr-3 font-medium">Total</th>
@@ -151,7 +153,7 @@
 							<td class="py-3 pr-3 capitalize">{order.status}</td>
 							<td class="py-3">
 								<div class="flex flex-wrap gap-2">
-									{#each statuses as item}
+									{#each statuses as item (item)}
 										<Button
 											size="sm"
 											variant={order.status === item ? 'default' : 'outline'}

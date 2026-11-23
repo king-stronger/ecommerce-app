@@ -97,15 +97,9 @@
 		errorProductId = null;
 	}
 
-	const outOfStock = $derived(
-		!!selected && selected.trackInventory && selected.stockQuantity < 1
-	);
-	const maxQuantity = $derived(
-		selected?.trackInventory ? Math.max(selected.stockQuantity, 1) : 99
-	);
-	const stockLeft = $derived(
-		selected?.trackInventory ? selected.stockQuantity : null
-	);
+	const outOfStock = $derived(!!selected && selected.trackInventory && selected.stockQuantity < 1);
+	const maxQuantity = $derived(selected?.trackInventory ? Math.max(selected.stockQuantity, 1) : 99);
+	const stockLeft = $derived(selected?.trackInventory ? selected.stockQuantity : null);
 
 	function setQuantity(next: number) {
 		quantityProductId = data.product.id;
@@ -167,7 +161,9 @@
 	<title>{data.product.name} · Ecommerce</title>
 </svelte:head>
 
-<article class="mx-auto grid max-w-6xl gap-10 px-4 py-8 sm:px-6 lg:grid-cols-2 lg:items-start lg:py-12">
+<article
+	class="mx-auto grid max-w-6xl gap-10 px-4 py-8 sm:px-6 lg:grid-cols-2 lg:items-start lg:py-12"
+>
 	<div class="grid gap-3">
 		<nav class="text-xs text-muted-foreground" aria-label="Breadcrumb">
 			<a href={resolve('/')} class="hover:text-foreground">Home</a>
@@ -222,7 +218,7 @@
 				<p class="flex items-baseline gap-3">
 					<span class="text-2xl font-semibold tabular-nums">{formatPrice(selected.price)}</span>
 					{#if selected.compareAtPrice > selected.price}
-						<span class="text-sm text-muted-foreground line-through tabular-nums">
+						<span class="text-sm text-muted-foreground tabular-nums line-through">
 							{formatPrice(selected.compareAtPrice)}
 						</span>
 					{/if}
