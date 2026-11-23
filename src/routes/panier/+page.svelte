@@ -34,7 +34,9 @@
 			<PageSkeleton variant="bag" />
 		</div>
 	{:else if cart.items.length === 0}
-		<div class="mt-10 rounded-3xl border border-dashed border-border bg-card px-6 py-14 text-center">
+		<div
+			class="mt-10 rounded-3xl border border-dashed border-border bg-card px-6 py-14 text-center"
+		>
 			<p class="text-sm text-muted-foreground">Your bag is empty.</p>
 			<a
 				href={resolve('/')}
@@ -46,17 +48,15 @@
 	{:else}
 		<ul class="mt-8 grid gap-4">
 			{#each cart.items as item (item.id)}
-				<li class="flex gap-4 rounded-2xl border border-border bg-card p-3 shadow-[0_12px_30px_-24px_var(--foreground)] sm:p-4">
+				<li
+					class="flex gap-4 rounded-2xl border border-border bg-card p-3 shadow-[0_12px_30px_-24px_var(--foreground)] sm:p-4"
+				>
 					<a
 						href={resolve('/products/[slug]', { slug: item.productSlug })}
 						class="size-24 shrink-0 overflow-hidden rounded-xl bg-muted sm:size-28"
 					>
 						{#if item.productImage}
-							<img
-								src={item.productImage}
-								alt=""
-								class="size-full object-cover"
-							/>
+							<img src={item.productImage} alt="" class="size-full object-cover" />
 						{/if}
 					</a>
 					<div class="grid min-w-0 flex-1 content-between gap-2 py-0.5">
@@ -91,8 +91,14 @@
 				Shipping and WELCOME10 are chosen at checkout.
 			</p>
 			<a
+				href={resolve('/commande')}
+				class="mt-4 inline-flex h-11 w-full items-center justify-center rounded-full bg-primary px-6 text-sm font-medium text-primary-foreground"
+			>
+				Checkout
+			</a>
+			<a
 				href={resolve('/')}
-				class="mt-4 inline-flex text-sm font-medium underline underline-offset-4"
+				class="mt-3 inline-flex text-sm font-medium underline underline-offset-4"
 			>
 				Keep shopping
 			</a>
