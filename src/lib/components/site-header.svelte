@@ -6,7 +6,10 @@
 	import { getCartCount, setCartCount } from '#lib/cart-count.svelte';
 	import ProfileMenu from '#lib/components/profile-menu.svelte';
 	import ShoppingBag from '@lucide/svelte/icons/shopping-bag';
+	import X from '@lucide/svelte/icons/x';
 	import { onMount } from 'svelte';
+
+	const PROMO_DISMISS_KEY = 'ecommerce-promo-dismissed';
 
 	let {
 		categories
@@ -16,12 +19,30 @@
 
 	const session = authClient.useSession();
 	const cartCount = $derived(getCartCount());
+	let promoOpen = $state(true);
 
 	onMount(async () => {
+		try {
+			if (localStorage.getItem(PROMO_DISMISS_KEY) === '1') {
+				promoOpen = false;
+			}
+		} catch {
+			// Private mode / storage unavailable.
+		}
+
 		const cart = await getCart();
 		if (!cart.data) return;
 		setCartCount(cart.data.items.reduce((sum, item) => sum + item.quantity, 0));
 	});
+
+	function dismissPromo() {
+		promoOpen = false;
+		try {
+			localStorage.setItem(PROMO_DISMISS_KEY, '1');
+		} catch {
+			// Private mode / storage unavailable.
+		}
+	}
 
 	function categoryCurrent(slug: string) {
 		return page.url.pathname === resolve('/categories/[slug]', { slug });
@@ -29,11 +50,23 @@
 </script>
 
 <header class="sticky top-0 z-20">
-	<div class="bg-promo text-promo-foreground">
-		<p class="mx-auto max-w-6xl px-4 py-2 text-center text-xs tracking-wide sm:px-6">
-			STANDARD €4.99 · EXPRESS €9.99 — WELCOME10 TAKES 10% OFF FROM €20
-		</p>
-	</div>
+	{#if promoOpen}
+		<div class="bg-promo text-promo-foreground">
+			<div class="relative mx-auto max-w-6xl px-4 py-2 sm:px-6">
+				<p class="pr-8 text-center text-xs tracking-wide">
+					STANDARD €4.99 · EXPRESS €9.99 — WELCOME10 TAKES 10% OFF FROM €20
+				</p>
+				<button
+					type="button"
+					class="absolute top-1/2 right-3 flex size-7 -translate-y-1/2 items-center justify-center rounded-full text-promo-foreground/80 transition hover:bg-foreground/5 hover:text-promo-foreground sm:right-5"
+					aria-label="Dismiss promo"
+					onclick={dismissPromo}
+				>
+					<X size={14} strokeWidth={2} aria-hidden="true" />
+				</button>
+			</div>
+		</div>
+	{/if}
 
 	<div class="border-b border-border bg-background">
 		<div class="mx-auto flex max-w-6xl items-center gap-4 px-4 py-3.5 sm:px-6">

@@ -192,7 +192,7 @@
 	{:else}
 		<h1 class="mt-4 font-serif text-3xl tracking-tight">{product.name}</h1>
 
-		<form class="mt-8 grid gap-5" onsubmit={saveProduct}>
+		<form class="mt-8 grid gap-5 rounded-2xl border border-border bg-card p-5" onsubmit={saveProduct}>
 			<div class="grid gap-1.5">
 				<Label for="name">Name</Label>
 				<Input id="name" bind:value={name} required />
@@ -253,7 +253,7 @@
 			<h2 class="font-serif text-2xl tracking-tight">Variants</h2>
 			<ul class="mt-4 grid gap-4">
 				{#each product.variants as variant (variant.id)}
-					<li class="rounded-2xl border border-border p-4">
+					<li class="rounded-2xl border border-border bg-card p-4">
 						<form
 							class="grid gap-3 sm:grid-cols-2"
 							onsubmit={(event) => {
@@ -326,7 +326,7 @@
 			</ul>
 
 			<form
-				class="mt-6 grid gap-4 rounded-2xl border border-dashed border-border p-4"
+				class="mt-6 grid gap-4 rounded-2xl border border-dashed border-border bg-card p-4"
 				onsubmit={addVariant}
 			>
 				<p class="text-sm font-medium">Add variant</p>

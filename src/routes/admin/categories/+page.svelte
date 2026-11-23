@@ -209,7 +209,7 @@
 	{:else if filtered.length === 0}
 		<p class="mt-8 text-sm text-muted-foreground">No categories match these filters.</p>
 	{:else}
-		<ul class="mt-8 divide-y divide-border rounded-2xl border border-border">
+		<ul class="mt-8 divide-y divide-border rounded-2xl border border-border bg-card">
 			{#each pageItems as category (category.id)}
 				<li class="flex flex-wrap items-center gap-4 px-4 py-3">
 					{#if category.image}

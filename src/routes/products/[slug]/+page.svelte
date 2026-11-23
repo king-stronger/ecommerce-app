@@ -361,7 +361,7 @@
 		{/if}
 
 		<div class="grid gap-3 pt-2">
-			<div class="flex gap-3 rounded-2xl border border-border p-4">
+			<div class="flex gap-3 rounded-2xl border border-border bg-card p-4">
 				<Truck size={20} strokeWidth={1.6} class="mt-0.5 shrink-0" aria-hidden="true" />
 				<div class="text-sm">
 					<p class="font-medium">Delivery</p>
@@ -370,7 +370,7 @@
 					</p>
 				</div>
 			</div>
-			<div class="rounded-2xl border border-border p-4 text-sm">
+			<div class="rounded-2xl border border-border bg-card p-4 text-sm">
 				<p class="font-medium">Welcome offer</p>
 				<p class="mt-1 text-muted-foreground">
 					WELCOME10 removes 10% from orders of €20 or more (max €15).

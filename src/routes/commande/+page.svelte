@@ -359,7 +359,7 @@
 					<div class="grid gap-2">
 						{#each shippingMethods as method (method.id)}
 							<label
-								class="flex cursor-pointer items-start gap-3 rounded-xl border border-border px-3 py-3 text-sm has-checked:border-foreground"
+								class="flex cursor-pointer items-start gap-3 rounded-xl border border-border bg-background px-3 py-3 text-sm has-checked:border-foreground"
 							>
 								<input
 									type="radio"

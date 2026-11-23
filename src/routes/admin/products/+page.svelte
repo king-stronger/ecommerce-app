@@ -136,7 +136,7 @@
 	{:else if products.length === 0}
 		<p class="mt-8 text-sm text-muted-foreground">No products match these filters.</p>
 	{:else}
-		<div class="mt-8 overflow-x-auto">
+		<div class="mt-8 overflow-x-auto rounded-2xl border border-border bg-card px-4">
 			<table class="w-full min-w-[40rem] border-collapse text-left text-sm">
 				<thead>
 					<tr

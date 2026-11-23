@@ -28,7 +28,7 @@
 		<div class="h-9 w-40 animate-pulse rounded bg-muted"></div>
 		<ul class="mt-8 grid gap-4">
 			{#each [1, 2, 3] as item (item)}
-				<li class="flex gap-4 rounded-2xl border border-border p-3">
+				<li class="flex gap-4 rounded-2xl border border-border bg-card p-3">
 					<div class="size-24 shrink-0 animate-pulse rounded-xl bg-muted"></div>
 					<div class="grid flex-1 content-center gap-2">
 						<div class="h-4 w-1/2 animate-pulse rounded bg-muted"></div>

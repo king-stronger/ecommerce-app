@@ -81,7 +81,7 @@
 	{#if open}
 		<div
 			role="menu"
-			class="absolute right-0 z-30 mt-2 w-56 overflow-hidden rounded-2xl border border-border bg-background py-1 shadow-[0_18px_40px_-24px_var(--foreground)]"
+			class="absolute right-0 z-30 mt-2 w-56 overflow-hidden rounded-2xl border border-border bg-card py-1 shadow-[0_18px_40px_-24px_var(--foreground)]"
 		>
 			<div class="border-b border-border px-3 py-2.5">
 				<p class="truncate text-sm font-medium">{label}</p>

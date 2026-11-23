@@ -8,7 +8,7 @@
 	} = $props();
 </script>
 
-<div class="mt-8 overflow-hidden rounded-2xl border border-border" aria-hidden="true">
+<div class="mt-8 overflow-hidden rounded-2xl border border-border bg-card" aria-hidden="true">
 	<div class="grid gap-0">
 		<div
 			class="grid border-b border-border bg-muted/40 px-4 py-3"

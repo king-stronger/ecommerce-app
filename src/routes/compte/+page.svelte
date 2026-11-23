@@ -133,7 +133,7 @@
 			</div>
 		</div>
 
-		<form class="mt-6 grid gap-4 rounded-2xl border border-border p-5" onsubmit={saveProfile}>
+		<form class="mt-6 grid gap-4 rounded-2xl border border-border bg-card p-5" onsubmit={saveProfile}>
 			<p class="text-sm font-medium">Profile</p>
 			<div class="grid gap-1.5">
 				<Label for="profile-name">Display name</Label>
@@ -154,7 +154,7 @@
 			</Button>
 		</form>
 
-		<div class="mt-6 rounded-2xl border border-border p-5">
+		<div class="mt-6 rounded-2xl border border-border bg-card p-5">
 			<p class="text-sm font-medium">Shopping</p>
 			<p class="mt-2 text-sm text-muted-foreground">
 				Use WELCOME10 at checkout for 10% off from €20 (cap €15). Your bag stays on this browser
@@ -200,7 +200,7 @@
 			</button>
 		</div>
 
-		<form class="mt-8 grid gap-4" onsubmit={submit}>
+		<form class="mt-8 grid gap-4 rounded-2xl border border-border bg-card p-5" onsubmit={submit}>
 			{#if mode === 'signup'}
 				<div class="grid gap-1.5">
 					<Label for="name">Name</Label>

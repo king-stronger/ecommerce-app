@@ -97,7 +97,7 @@
 	<a href={resolve('/admin/products')} class="text-sm underline underline-offset-4">← Products</a>
 	<h1 class="mt-4 font-serif text-3xl tracking-tight">New product</h1>
 
-	<form class="mt-8 grid gap-5" onsubmit={save}>
+	<form class="mt-8 grid gap-5 rounded-2xl border border-border bg-card p-5" onsubmit={save}>
 		<div class="grid gap-1.5">
 			<Label for="name">Name</Label>
 			<Input
@@ -155,7 +155,7 @@
 			{/each}
 		</fieldset>
 
-		<div class="rounded-2xl border border-border p-4">
+		<div class="rounded-2xl border border-border bg-card p-4">
 			<p class="text-sm font-medium">First variant</p>
 			<div class="mt-4 grid gap-4 sm:grid-cols-3">
 				<div class="grid gap-1.5">
