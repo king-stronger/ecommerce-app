@@ -6,13 +6,14 @@ SvelteKit storefront for `ecommerce-api`. Production-ready; prefer small, low-ri
 
 - **App**: SvelteKit 3 (Svelte 5 runes) · Vite 8 · `@sveltejs/adapter-cloudflare`
 - **UI**: Tailwind 4 · shadcn-svelte (vega) · bits-ui · Lucide · fonts Inter + Libre Baskerville
-- **API client**: `@hey-api/openapi-ts` → `src/lib/api/client` (fetch SDK, credentials included)
+- **API client**: `@hey-api/openapi-ts` → `src/lib/api/client` + `transport.ts` (cookie/bearer) + service-binding SSR fetch
 - **Auth**: `better-auth` Svelte client (`adminClient` plugin) against the API origin
+- **Catalog cache**: `@tanstack/svelte-query` (`catalog-queries.ts`, `ensureQueryData` in universal loads)
 - **Lint/format**: ESLint + Prettier (svelte + tailwind plugins)
 - **Package manager**: pnpm
 - **Alias**: `#lib` / `#lib/*` → `src/lib` (see `package.json` `imports` + `tsconfig` paths)
 
-There is **no** TanStack Query in this repo. Data loading uses SvelteKit `+page.server.ts` loaders and direct hey-api SDK calls in components.
+Catalogue reads use universal `+layout.ts` / `+page.ts` + TanStack. Admin, panier, commande, and compte stay on their existing client patterns.
 
 ## Layout
 

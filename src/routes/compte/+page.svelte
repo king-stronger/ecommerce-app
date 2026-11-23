@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { resolve } from '$app/paths';
+	import { clearQueryCache } from '#lib/api/query-client';
 	import { isAdminUser } from '#lib/admin';
 	import { authClient } from '#lib/auth-client';
 	import { Button } from '#lib/components/ui/button/index.js';
@@ -39,7 +40,9 @@
 				const result = await authClient.signIn.email({ email, password });
 				if (result.error) {
 					authError = result.error.message ?? 'Could not sign in.';
+					return;
 				}
+				clearQueryCache();
 				return;
 			}
 
@@ -50,7 +53,9 @@
 			});
 			if (result.error) {
 				authError = result.error.message ?? 'Could not create your account.';
+				return;
 			}
+			clearQueryCache();
 		} finally {
 			pending = false;
 		}
@@ -72,6 +77,7 @@
 
 	async function signOut() {
 		await authClient.signOut();
+		clearQueryCache();
 		await goto(resolve('/'));
 	}
 

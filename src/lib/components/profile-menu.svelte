@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { resolve } from '$app/paths';
+	import { clearQueryCache } from '#lib/api/query-client';
 	import { isAdminUser } from '#lib/admin';
 	import { authClient } from '#lib/auth-client';
 	import FolderTree from '@lucide/svelte/icons/folder-tree';
@@ -54,6 +55,7 @@
 	async function signOut() {
 		close();
 		await authClient.signOut();
+		clearQueryCache();
 		await goto(resolve('/'));
 	}
 </script>
