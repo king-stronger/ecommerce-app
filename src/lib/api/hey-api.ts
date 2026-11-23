@@ -1,5 +1,5 @@
-import { API_URL } from '$app/env/public';
 import type { CreateClientConfig } from './client/client.gen';
+import { authHeaders, baseUrl, credentials } from './transport';
 
 /**
  * On Cloudflare, a Worker cannot fetch another Worker on workers.dev over the public
@@ -21,7 +21,15 @@ const serverFetch: typeof fetch = async (input, init) => {
 
 export const createClientConfig: CreateClientConfig = (config) => ({
 	...config,
-	baseUrl: API_URL,
-	credentials: 'include',
+	baseUrl: baseUrl(),
+	credentials: credentials(),
 	...(import.meta.env.SSR ? { fetch: serverFetch } : {})
 });
+
+/** Apply transport auth headers onto an outgoing Request. */
+export function applyAuthHeaders(request: Request) {
+	for (const [key, value] of Object.entries(authHeaders())) {
+		request.headers.set(key, value);
+	}
+	return request;
+}

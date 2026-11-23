@@ -1,11 +1,17 @@
 import { adminClient } from 'better-auth/client/plugins';
 import { createAuthClient } from 'better-auth/svelte';
-import { API_URL } from '$app/env/public';
+import { authHeaders, baseUrl, credentials } from '#lib/api/transport';
 
 export const authClient = createAuthClient({
-	baseURL: API_URL,
+	baseURL: baseUrl(),
 	fetchOptions: {
-		credentials: 'include'
+		credentials: credentials(),
+		onRequest(context) {
+			for (const [key, value] of Object.entries(authHeaders())) {
+				context.headers.set(key, value);
+			}
+			return context;
+		}
 	},
 	plugins: [adminClient()]
 });
