@@ -53,19 +53,21 @@
 {#if data.error}
 	<p class="mx-auto max-w-6xl px-4 py-16 text-sm sm:px-6">{data.error}</p>
 {:else}
-	<section class="relative min-h-[70vh] overflow-hidden">
+	<section class="relative flex min-h-[calc(100svh-9.5rem)] overflow-hidden">
 		<img src={heroImage} alt="" class="absolute inset-0 size-full object-cover" />
-		<div class="absolute inset-0 bg-black/25"></div>
-		<div class="relative mx-auto flex min-h-[70vh] max-w-6xl items-end px-4 py-14 sm:px-6 sm:py-20">
+		<div class="absolute inset-0 bg-black/50"></div>
+		<div
+			class="relative mx-auto flex w-full max-w-6xl flex-1 items-center px-4 py-10 sm:px-6 sm:py-12"
+		>
 			<div class="max-w-xl text-white">
-				<h1 class="font-serif text-4xl leading-[1.05] text-balance sm:text-6xl">
+				<h1 class="font-serif text-4xl leading-[1.05] text-balance sm:text-5xl lg:text-6xl">
 					Quiet luxury, loudly considered.
 				</h1>
-				<p class="mt-5 max-w-[38ch] text-sm text-white/85 sm:text-base">
+				<p class="mt-4 max-w-[38ch] text-sm text-white/90 sm:text-base">
 					Explore clothing and statement accessories curated for every season, every style, and
 					every occasion.
 				</p>
-				<div class="mt-8 flex flex-wrap items-center gap-4">
+				<div class="mt-7 flex flex-wrap items-center gap-4">
 					<a
 						href="#edit"
 						class="inline-flex h-11 items-center rounded-full bg-primary px-6 text-sm font-medium text-primary-foreground"

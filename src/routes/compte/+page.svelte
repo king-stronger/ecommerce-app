@@ -1,9 +1,11 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { resolve } from '$app/paths';
+	import { getOrders, type GetOrdersResponse } from '#lib/api/client';
 	import { clearQueryCache } from '#lib/api/query-client';
 	import { isAdminUser } from '#lib/admin';
 	import { authClient } from '#lib/auth-client';
+	import { formatPrice } from '#lib/catalog';
 	import { Button } from '#lib/components/ui/button/index.js';
 	import { Input } from '#lib/components/ui/input/index.js';
 	import { Label } from '#lib/components/ui/label/index.js';
@@ -22,6 +24,11 @@
 	let profilePending = $state(false);
 	let syncedUserId = $state<string | null>(null);
 
+	let orders = $state<GetOrdersResponse>([]);
+	let ordersLoading = $state(false);
+	let ordersError = $state('');
+	let ordersLoadedFor = $state<string | null>(null);
+
 	$effect(() => {
 		const user = $session.data?.user;
 		if (!user || user.id === syncedUserId) return;
@@ -30,6 +37,50 @@
 		profileMessage = '';
 		profileError = '';
 	});
+
+	$effect(() => {
+		const user = $session.data?.user;
+		if (!user) {
+			orders = [];
+			ordersLoadedFor = null;
+			ordersError = '';
+			return;
+		}
+		if (ordersLoadedFor === user.id || ordersLoading) return;
+		void loadOrders(user.id);
+	});
+
+	async function loadOrders(userId: string) {
+		ordersLoading = true;
+		ordersError = '';
+		const result = await getOrders();
+		ordersLoading = false;
+		if (result.error || !result.data) {
+			orders = [];
+			ordersError = 'Could not load your orders.';
+			ordersLoadedFor = userId;
+			return;
+		}
+		orders = result.data;
+		ordersLoadedFor = userId;
+	}
+
+	function orderDate(value: string | Date) {
+		return new Date(value).toLocaleDateString('en-IE', {
+			year: 'numeric',
+			month: 'short',
+			day: 'numeric'
+		});
+	}
+
+	function openOrder(orderNumber: string, customerEmail: string) {
+		try {
+			sessionStorage.setItem(`ecommerce-order-email:${orderNumber}`, customerEmail);
+		} catch {
+			// Private mode / storage unavailable.
+		}
+		void goto(resolve('/commandes/[orderNumber]', { orderNumber }));
+	}
 
 	async function submit(event: SubmitEvent) {
 		event.preventDefault();
@@ -133,7 +184,10 @@
 			</div>
 		</div>
 
-		<form class="mt-6 grid gap-4 rounded-2xl border border-border bg-card p-5" onsubmit={saveProfile}>
+		<form
+			class="mt-6 grid gap-4 rounded-2xl border border-border bg-card p-5"
+			onsubmit={saveProfile}
+		>
 			<p class="text-sm font-medium">Profile</p>
 			<div class="grid gap-1.5">
 				<Label for="profile-name">Display name</Label>
@@ -153,6 +207,45 @@
 				Save profile
 			</Button>
 		</form>
+
+		<div class="mt-6 rounded-2xl border border-border bg-card p-5">
+			<p class="text-sm font-medium">Order history</p>
+			{#if ordersLoading && ordersLoadedFor !== user.id}
+				<ul class="mt-4 grid gap-3" aria-hidden="true">
+					{#each [1, 2] as row (row)}
+						<li class="h-16 animate-pulse rounded-xl bg-foreground/15"></li>
+					{/each}
+				</ul>
+			{:else if ordersError}
+				<p class="mt-3 text-sm text-destructive">{ordersError}</p>
+			{:else if orders.length === 0}
+				<p class="mt-3 text-sm text-muted-foreground">No orders yet.</p>
+			{:else}
+				<ul class="mt-4 grid gap-3">
+					{#each orders as order (order.id)}
+						<li>
+							<button
+								type="button"
+								class="flex w-full items-start justify-between gap-4 rounded-xl border border-border bg-background px-4 py-3 text-left text-sm transition hover:border-foreground"
+								onclick={() => openOrder(order.orderNumber, order.customerEmail)}
+							>
+								<span class="min-w-0">
+									<span class="block font-medium tabular-nums">{order.orderNumber}</span>
+									<span class="mt-1 block text-muted-foreground">
+										{orderDate(order.createdAt)} · {order.itemCount}
+										{order.itemCount === 1 ? 'item' : 'items'} ·
+										<span class="capitalize">{order.status}</span>
+									</span>
+								</span>
+								<span class="shrink-0 font-medium tabular-nums"
+									>{formatPrice(order.totalAmount)}</span
+								>
+							</button>
+						</li>
+					{/each}
+				</ul>
+			{/if}
+		</div>
 
 		<div class="mt-6 rounded-2xl border border-border bg-card p-5">
 			<p class="text-sm font-medium">Shopping</p>
